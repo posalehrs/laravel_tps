@@ -6,24 +6,20 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateClassTable extends Migration
 {
-    /**
-     * Run the migrations.
-     *
-     * @return void
-     */
+
     public function up()
     {
         Schema::create('Class', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamps();
+            $table->string('class_code');
+            $table->string('id_trainer');
+            $table->text('description');
+            $table->dateTime('start_date');
+            $table->dateTime('end_date');
+            //$table->timestamps();
         });
     }
 
-    /**
-     * Reverse the migrations.
-     *
-     * @return void
-     */
     public function down()
     {
         Schema::dropIfExists('Class');
