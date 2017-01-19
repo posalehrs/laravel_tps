@@ -14,3 +14,12 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('login',['as'=>'getLogin','uses'=>'Auth\LoginController@getLogin']);
+Route::post('login',['as'=>'postLogin','uses'=>'Auth\LoginController@postLogin']);
+Route::get('logout',function(){
+    \Auth::logout();
+    return redirect('login');
+});
+
+Route::get('list-course',['as'=>'getCourse','uses'=>'CourseController@index']);

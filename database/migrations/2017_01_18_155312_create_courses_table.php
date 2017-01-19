@@ -4,24 +4,24 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateClassTable extends Migration
+class CreateCoursesTable extends Migration
 {
 
     public function up()
     {
-        Schema::create('Class', function (Blueprint $table) {
+        Schema::create('Courses', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('class_code');
-            $table->string('id_trainer');
+            $table->string('course_code');
+            $table->integer('id_user');
             $table->text('description');
             $table->dateTime('start_date');
             $table->dateTime('end_date');
-            //$table->timestamps();
+            $table->timestamps();
         });
     }
 
     public function down()
     {
-        Schema::dropIfExists('Class');
+        Schema::dropIfExists('Courses');
     }
 }

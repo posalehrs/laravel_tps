@@ -7,46 +7,57 @@ class DatabaseSeeder extends Seeder
 {
     public function run()
     {
-        $this->call(TrainerTableSeeder::class);
-        $this->call(ClassTableSeeder::class);
+        $this->call(UserTableSeeder::class);
+        $this->call(CourseTableSeeder::class);
     }
 }
 
-class TrainerTableSeeder extends Seeder{
+class UserTableSeeder extends Seeder{
     public function run()
     {
         $faker = Faker::create();
-        $trainerData=array();
-        for ($i=1; $i <= 10; $i++) {
-            $trainerData[]=array(
-                'trainer_code'=>'T'.$i,
+        $userData=array();
+
+        //Create admin
+        $userData[]=array(
+            'user_code'=>'T1',
+            'name'=>$faker->text($maxNbChars = 10),
+            'password'=>Hash::make(123),
+            'email'=>$faker->email,
+            'role'=>1
+        );
+
+        for ($i=2; $i <= 10; $i++) {
+            $userData[]=array(
+                'user_code'=>'T'.$i,
                 'name'=>$faker->text($maxNbChars = 10),
-                'password'=>$faker->password(6,10),
-                'email'=>$faker->email
+                'password'=>Hash::make(123),
+                'email'=>$faker->email,
+                'role'=>0
             );
         }
-        DB::table('Trainer')->insert($trainerData);
+        DB::table('Users')->insert($userData);
     }
 }
 
-class ClassTableSeeder extends Seeder{
+class CourseTableSeeder extends Seeder{
     public function run()
     {
         $faker = Faker::create();
-        $classData=array();
+        $courseData=array();
         $count = 0;
         for ($i=1; $i <= 10; $i++) {
             for ($j=1; $j <=10 ; $j++) {
                 $count = $count + 1;
-                $classData[] = array(
-                    'class_code' => 'C'.$count,
-                    'id_trainer' => $j,
+                $courseData[] = array(
+                    'course_code' => 'C'.$count,
+                    'id_user' => $j,
                     'description' => $faker->text($maxNbChars = 100),
                     'start_date' => $faker->dateTimeThisYear(),
                     'end_date' => $faker->dateTimeThisYear()
                 );
             }
         }
-        DB::table('Class')->insert($classData);
+        DB::table('Courses')->insert($courseData);
     }
 }
