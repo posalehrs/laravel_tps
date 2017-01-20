@@ -51,8 +51,11 @@ class CourseTableSeeder extends Seeder{
                 $count = $count + 1;
                 $courseData[] = array(
                     'course_code' => 'C'.$count,
+                    'course_name' => $faker->text($maxNbChars = 30),
                     'id_user' => $j,
                     'description' => $faker->text($maxNbChars = 100),
+                    'quantity'=>$faker->randomDigit+20,
+                    'location'=>"C".$faker->randomDigit,
                     'start_date' => $faker->dateTimeThisYear(),
                     'end_date' => $faker->dateTimeThisYear()
                 );

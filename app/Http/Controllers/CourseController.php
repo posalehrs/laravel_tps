@@ -6,39 +6,18 @@ use Illuminate\Http\Request;
 
 class CourseController extends Controller
 {
-    public function index()
-    {
-        $courses=\App\Course::all();
-        return view('course.list_course',['courses'=>$courses]);
-    }
-
-    public function create()
-    {
-        //
-    }
-
-    public function store(Request $request)
-    {
-        //
-    }
-
-    public function show($id)
-    {
-        //
-    }
-
-    public function edit($id)
-    {
-        //
-    }
-
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    public function destroy($id)
-    {
-        //
+    public function index(){
+        if (\Auth::check()) {
+            if (\Auth::user()->role == 1) {
+                $courses = \App\Course::paginate(10);
+            } else {
+                $courses = \App\Course::where('id_user', '=', \Auth::user()->id)
+                    ->orderBy('start_date', 'asc')
+                    ->paginate(10);
+            }
+            return view('course.list_course', ['courses' => $courses]);
+        } else {
+            return redirect('login');
+        }
     }
 }

@@ -10,26 +10,20 @@ class LoginController extends Controller
 {
     use AuthenticatesUsers;
 
-    protected $redirectTo = '/home';
-
-//    public function __construct()
-//    {
-//        $this->middleware('guest', ['except' => 'logout']);
-//    }
-
     public function getLogin(){
         return view('auth.login');
     }
 
     public function postLogin(LoginRequest $request){
-        $auth=array(
-            'user_code'=>$request->user_code,
-            'password'=>$request->password
+        $auth = array(
+            'user_code' => $request->user_code,
+            'password' => $request->password
         );
-        if(\Auth::attempt($auth)){
+        if (\Auth::attempt($auth)) {
+
             return redirect('list-course');
-        }else{
-            echo'that bai';
+        } else {
+            return redirect('login');
         }
     }
 }
