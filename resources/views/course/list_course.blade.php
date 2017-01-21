@@ -2,7 +2,11 @@
 @extends('layout')
 
 @section('content')
-    {{ $courses->links() }}
+    <h2>Course list</h2>
+    {{ $courses->links() }}<br>
+    @if(Auth::user()->role==1)
+    <button type="button" class="btn btn-info" onclick="location.href='/update-course'">Add new</button><br><br>
+    @endif
     <table class="table table-bordered">
         <thead>
         <tr>
@@ -13,6 +17,7 @@
             <th>Quantity</th>
             <th>Start date</th>
             <th>End date</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -25,6 +30,11 @@
                 <td>{{$course->quantity}}</td>
                 <td>{{$course->start_date}}</td>
                 <td>{{$course->end_date}}</td>
+                @if(Auth::user()->role==0)
+                    <td><button type="button" class="btn btn-success" onclick="location.href='/course?course_id={{$course->id}}'">Detail</button></td>
+                @else
+                    <td><button type="button" class="btn btn-success" onclick="location.href='/update-course?course_id={{$course->id}}'">Edit</button></td>
+                @endif
             </tr>
         @endforeach
 

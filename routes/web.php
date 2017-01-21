@@ -20,3 +20,11 @@ Route::get('logout',function(){
 Route::get('list-course',['as'=>'getCourse','uses'=>'CourseController@index']);
 
 Route::get('list-user',['as'=>'getUser','uses'=>'UserController@index']);
+
+Route::get('course',['as'=>'getCourse','uses'=>'CourseController@getCourse']);
+
+Route::get('update-course',['as'=>'postUpdateCourse','uses'=>'CourseController@getCourse']);
+Route::post('update-course',['as'=>'postUpdateCourse','uses'=>'CourseController@postCourse']);
+
+
+
