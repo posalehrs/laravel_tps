@@ -21,8 +21,8 @@
                 </div>
                 <ul class="nav navbar-nav">
                     @if(Auth::user()->role==1)
-                        <li><a href="/list-course">Manager course</a></li>
-                        <li><a href="/list-user">Manager traner</a></li>
+                        <li><a href="/list-course">Manage course</a></li>
+                        <li><a href="/list-user">Manage traner</a></li>
                     @endif
                     <li><a href="/change-password">Change password</a></li>
                     <li><a href="/logout">Logout</a></li>
